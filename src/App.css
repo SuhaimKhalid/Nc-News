@@ -4,3 +4,48 @@
   color: white;
   font-size: 30px;
 }
+.home_section {
+  padding: 20px;
+  margin: 20px;
+  background-color: aliceblue;
+  border-radius: 20px;
+}
+.home_section h2 {
+  text-align: center;
+  font-size: 19px;
+  font-weight: bold;
+}
+.home_section p {
+}
+.home_section:hover {
+  background-color: rgb(238, 255, 255);
+}
+
+/* Home-Coding Article */
+.home-article {
+  padding: 20px;
+  margin: 20px;
+  background-color: antiquewhite;
+  border-radius: 20px;
+}
+.home-article .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.left-side-home-article {
+  width: 40%;
+  padding: 20px;
+  justify-items: center;
+}
+.right-side-home-article {
+  width: 60%;
+  padding: 20px;
+  justify-items: center;
+  padding: 30px;
+}
+.right-side-home-article h3 {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
