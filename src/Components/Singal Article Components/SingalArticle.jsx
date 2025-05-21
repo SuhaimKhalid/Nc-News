@@ -59,11 +59,14 @@ export const SingalArticle = () => {
             singleArticle={singleArticle}
             allArticleTitleObject={allArticleTitleObject}
             setArticleSelect={setArticleSelect}
+            articleSelect={articleSelect}
           />
           <SingalArticleCard
             show={show}
+            articleSelect={articleSelect}
             articleTitleLoad={articleTitleLoad}
             singleArticle={singleArticle}
+            setSingalArticle={setSingalArticle}
           />
         </Container>
       ) : (
