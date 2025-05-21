@@ -5,7 +5,7 @@ import { HeaderNavbar } from "./Components/HeaderNavbar";
 import { Home } from "./Components/Home";
 import { Route, Routes } from "react-router";
 import { Articles } from "./Components/Articles";
-import { Comments } from "./Components/Comments";
+import { Comments } from "./Components/Comments Components/Comments";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import { SingalArticle } from "./Components/Singal Article Components/SingalArticle";
