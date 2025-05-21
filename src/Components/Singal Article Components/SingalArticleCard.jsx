@@ -21,21 +21,26 @@ export const SingalArticleCard = ({ show, singleArticle }) => {
                 src={singleArticle.article_img_url}
               />
               <Card.Body>
-                <Card.Title>{singleArticle.item_name}</Card.Title>
-                <Card.Text>{singleArticle.topic}</Card.Text>
+                <Card.Title>{singleArticle.title}</Card.Title>
+                <Card.Text>{singleArticle.body}</Card.Text>
+
                 <Table striped>
                   <tbody>
+                    <tr>
+                      <td>Topic:</td>
+                      <td>{singleArticle.topic}</td>
+                    </tr>
                     <tr>
                       <td>Created At:</td>
                       <td>{singleArticle.created_at}</td>
                     </tr>
                     <tr>
-                      <td>Votes:</td>
-                      <td>{singleArticle.votes}</td>
+                      <td>Author:</td>
+                      <td>{singleArticle.author}</td>
                     </tr>
                     <tr>
-                      <td>Comment Count</td>
-                      <td>{singleArticle.comment_count}</td>
+                      <td>Votes:</td>
+                      <td>{singleArticle.votes}</td>
                     </tr>
                   </tbody>
                 </Table>

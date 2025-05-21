@@ -1,24 +1,26 @@
 import { Container } from "react-bootstrap";
-import { ArticleName } from "./Singal Article Components/ArticleName";
+import { ArticleName } from "../Singal Article Components/ArticleName";
 import { useEffect, useState } from "react";
-import { ArticleName } from "./ArticleName";
-import { GetAllArticles } from "../../../api";
+import { GetAllArticles, GetCommentsByArticleId } from "../../../api";
 import { GetAllArticlesbyId } from "../../../api";
 import Spinner from "react-bootstrap/Spinner";
-import { Container } from "react-bootstrap";
-import { SingalArticleCard } from "./SingalArticleCard";
+import { CommentCardSection } from "./CommentCardSection";
 export const Comments = () => {
   //Check for article Title
   const [articleTitleLoad, setArticleTitleLoad] = useState(false);
-  const [singleArticle, setSingalArticle] = useState({});
+
   //TO send nma eof title in userInput Field
   const [allArticleTitleObject, setAllArticleObject] = useState({});
   //TO get back User Selected Option by Id value
   const [articleSelect, setArticleSelect] = useState(""); //1,2,3
   const [isloading, setLoading] = useState(true);
 
-  const [show, setShow] = useState(false);
+  const [commentshow, setCommentShow] = useState(false);
+  const [articleShow, setArticleShow] = useState(false);
 
+  const [commentsArray, setCommentArray] = useState([]);
+
+  const [singleArticle, setSingleArticle] = useState({});
   //For Only Article Title
   useEffect(() => {
     setLoading(true);
@@ -43,10 +45,16 @@ export const Comments = () => {
     if (articleTitleLoad) {
       GetAllArticlesbyId(articleSelect)
         .then((data) => {
-          setSingalArticle(data);
+          setSingleArticle(data);
+        })
+        .finally(() => setArticleShow(true));
+
+      GetCommentsByArticleId(articleSelect)
+        .then((data) => {
+          setCommentArray(data);
         })
         .finally(() => {
-          setShow(true);
+          setCommentShow(true);
         });
     }
   }, [articleSelect]);
@@ -59,10 +67,17 @@ export const Comments = () => {
           </h3>
           <ArticleName
             setArticleTitleLoad={setArticleTitleLoad}
-            singleArticle={singleArticle}
             allArticleTitleObject={allArticleTitleObject}
             setArticleSelect={setArticleSelect}
           />
+          {commentshow && articleShow ? (
+            <CommentCardSection
+              singleArticle={singleArticle}
+              commentsArray={commentsArray}
+            />
+          ) : (
+            ""
+          )}
         </Container>
       ) : (
         <section className="home-article spinner_center">
