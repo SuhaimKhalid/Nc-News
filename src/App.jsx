@@ -8,6 +8,7 @@ import { Articles } from "./Components/Articles";
 import { Comments } from "./Components/Comments";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
+import { SingalArticle } from "./Components/Singal Article Components/SingalArticle";
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/articles" element={<Articles />} />
+          <Route path="/find-article" element={<SingalArticle />} />
           <Route path="/comments" element={<Comments />} />
         </Routes>
       </Container>

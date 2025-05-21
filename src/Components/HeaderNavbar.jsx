@@ -14,6 +14,9 @@ export const HeaderNavbar = () => {
             <NavLink to="/" className="nav-link">
               Home
             </NavLink>
+            <NavLink to="/find-article" className="nav-link">
+              Find Article
+            </NavLink>
             <NavLink to="/articles" className="nav-link">
               Articles
             </NavLink>
