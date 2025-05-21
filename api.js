@@ -21,3 +21,12 @@ export const GetCommentsByArticleId = (id) => {
     return data.comments;
   });
 };
+
+//Update Article by Increment vote
+export const UpdateVoteByArticle = (id, inc_votes) => {
+  return api
+    .patch(`/articles/${id}`, { inc_votes: inc_votes })
+    .then(({ data }) => {
+      return data.article;
+    });
+};

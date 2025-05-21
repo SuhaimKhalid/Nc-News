@@ -4,7 +4,7 @@ import "./App.css";
 import { HeaderNavbar } from "./Components/HeaderNavbar";
 import { Home } from "./Components/Home";
 import { Route, Routes } from "react-router";
-import { Articles } from "./Components/Articles";
+import { Articles } from "./Components/ArticleComponents/Articles";
 import { Comments } from "./Components/Comments Components/Comments";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";

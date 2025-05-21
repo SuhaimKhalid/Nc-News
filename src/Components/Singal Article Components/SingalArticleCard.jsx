@@ -1,9 +1,24 @@
 import { useState, useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
+
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
-export const SingalArticleCard = ({ show, singleArticle }) => {
+import { VoteComponent } from "../VoteComponent";
+export const SingalArticleCard = ({
+  show,
+  singleArticle,
+  setSingalArticle,
+  articleSelect,
+}) => {
+  const formatedDate = new Date(singleArticle.created_at).toLocaleDateString(
+    "en-GB",
+    {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }
+  );
+
   return (
     <>
       {show ? (
@@ -17,7 +32,7 @@ export const SingalArticleCard = ({ show, singleArticle }) => {
                   borderRadius: "10px",
                 }}
                 variant="top"
-                alt={"ArticleImage No " + singleArticle.article_id}
+                alt={singleArticle.title}
                 src={singleArticle.article_img_url}
               />
               <Card.Body>
@@ -32,7 +47,7 @@ export const SingalArticleCard = ({ show, singleArticle }) => {
                     </tr>
                     <tr>
                       <td>Created At:</td>
-                      <td>{singleArticle.created_at}</td>
+                      <td>{formatedDate}</td>
                     </tr>
                     <tr>
                       <td>Author:</td>
@@ -45,7 +60,10 @@ export const SingalArticleCard = ({ show, singleArticle }) => {
                   </tbody>
                 </Table>
 
-                <Button variant="primary">Vote</Button>
+                <VoteComponent
+                  articleId={articleSelect}
+                  setSingalArticle={setSingalArticle}
+                />
               </Card.Body>
             </Card>
           </Col>

@@ -1,9 +1,9 @@
 import { Container } from "react-bootstrap";
-import { ArticleFilter } from "./ArticleComponents/ArticleFilter";
+import { ArticleFilter } from "./ArticleFilter";
 
-import { ArticleCard } from "./ArticleComponents/ArticleCard";
+import { ArticleCard } from "./ArticleCard";
 import { useEffect, useState } from "react";
-import { GetAllArticles } from "../../api";
+import { GetAllArticles } from "../../../api";
 import Spinner from "react-bootstrap/Spinner";
 
 export const Articles = () => {
