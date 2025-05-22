@@ -7,10 +7,22 @@ import { GetAllArticles } from "../../../api";
 import Spinner from "react-bootstrap/Spinner";
 import { GetArticlesbyId } from "../../../api";
 import { useNavigate } from "react-router";
+import { ArticleName } from "../Singal Article Components/ArticleName";
+import { SingleArticleCard } from "../Singal Article Components/SingleArticleCard";
 export const Articles = () => {
   const [articleTopics, setArticleTopics] = useState([]);
   const [allArticles, setAllArticles] = useState([]);
   const [isloading, setLoading] = useState(true);
+
+  ////For Single Card Article
+
+  const [singleArticle, setSingleArticle] = useState({});
+  //TO send nma eof title in userInput Field
+  const [allArticleTitleObject, setAllArticleObject] = useState({});
+
+  const [singleArticleShow, setSingleArticleShow] = useState(false);
+  //TO get back User Selected Option by Id value
+  const [articleSelectId, setArticleSelectId] = useState(""); //1,2,3
 
   useEffect(() => {
     setLoading(true);
@@ -19,12 +31,34 @@ export const Articles = () => {
         const getTopics = [...new Set(data.map((item) => item.topic))];
         setArticleTopics(getTopics);
 
+        //For Singale Article
+        const articleObject = {};
+        data.forEach((item) => {
+          articleObject[item.article_id] = item.title;
+        });
+
+        setAllArticleObject((prev) => ({
+          ...prev,
+          ...articleObject,
+        }));
+
         setAllArticles(data);
       })
       .finally(() => {
         setLoading(false);
       });
   }, []);
+
+  //For Search For single Article
+  function searchSingleArticleHandler(id) {
+    GetArticlesbyId(id)
+      .then((data) => {
+        setSingleArticle(data);
+      })
+      .finally(() => {
+        setSingleArticleShow(true);
+      });
+  }
 
   const navigate = useNavigate();
   function onClickCardHandler(id) {
@@ -33,21 +67,28 @@ export const Articles = () => {
   return (
     <>
       {!isloading ? (
-        <Container>
-          <h3
-            className="text-3xl font-bold underline"
-            style={{ textAlign: "center" }}
-          >
-            Articles
-          </h3>
-
+        <section className="Article_page">
+          <h3>Articles</h3>
+          <ArticleName
+            searchSingleArticleHandler={searchSingleArticleHandler}
+            allArticleTitleObject={allArticleTitleObject}
+            setArticleSelectId={setArticleSelectId}
+            articleSelectId={articleSelectId}
+          />
           <ArticleFilter />
 
-          <ArticleCard
-            onClickCardHandler={onClickCardHandler}
-            allArticles={allArticles}
-          />
-        </Container>
+          {singleArticleShow ? (
+            <SingleArticleCard
+              setSingleArticleShow={setSingleArticleShow}
+              singleArticle={singleArticle}
+            />
+          ) : (
+            <ArticleCard
+              onClickCardHandler={onClickCardHandler}
+              allArticles={allArticles}
+            />
+          )}
+        </section>
       ) : (
         <section className="home-article spinner_center">
           <h3 className="text-center text-3xl font-bold">

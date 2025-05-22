@@ -35,3 +35,10 @@ export const UpdateVoteByArticle = (id, inc_votes) => {
       return data.article;
     });
 };
+
+//Patch Request to add new Comment
+export const postComment = (id, body) => {
+  return api.post(`/articles/${id}/comments`, body).then(({ data }) => {
+    return data.comment;
+  });
+};

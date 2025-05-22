@@ -1,7 +1,14 @@
 @import "tailwindcss";
-
+:root {
+  --main_color: #34353a;
+  --second_color: #33243f;
+  --Third_color: #6c448c;
+}
+body {
+  background-color: #34353a !important;
+}
 .main-navbar {
-  background-color: rgb(45, 33, 59);
+  background-color: #33243f;
 }
 .main-navbar a {
   color: white !important;
@@ -43,7 +50,7 @@ nav ul li .nav-link {
 
   padding: 20px;
   margin: 20px auto;
-  background-color: aliceblue;
+  background-color: white;
   border-radius: 20px;
 }
 
@@ -55,15 +62,33 @@ nav ul li .nav-link {
 .home_section p {
 }
 .home_section:hover {
-  background-color: rgb(238, 255, 255);
+  background-color: var(--second_color);
+  color: white;
 }
 
 /* Home-Coding Article */
 .home-article {
   padding: 20px;
   margin: 20px;
-  background-color: antiquewhite;
+  color: white;
+  background-color: var(--Third_color);
   border-radius: 20px;
+}
+.left-side-home-article img {
+  width: 100%;
+  border-radius: 20px;
+}
+.right-side-home-article {
+  border: 2px solid white;
+  border-radius: 20px;
+  margin: 10px;
+}
+.right-side-home-article h3 {
+  font-size: 30px;
+}
+.right-side-home-article p {
+  font-size: 20px;
+  font-weight: bold;
 }
 .home-article .row {
   display: flex;
@@ -91,10 +116,7 @@ nav ul li .nav-link {
 .spinner_div {
   margin: 20px;
 }
-.home-article img {
-  width: 300px;
-  border-radius: 20px;
-}
+
 .home-article > h3 {
   font-size: 30px;
   font-weight: 600;
@@ -131,4 +153,77 @@ nav ul li .nav-link {
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+.singleArticleImg {
+  display: flex;
+  justify-content: center;
+}
+.singleArticleImg img {
+  width: 70%;
+  border-radius: 20px;
+}
+.singaleArticle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Article Page
+*/
+.Article_page {
+  padding: 20px 0px 0px 0px;
+}
+.Article_page > h3 {
+  color: white;
+  text-align: center;
+  font-size: 35px;
+}
+button {
+  border: white !important;
+  background-color: var(--second_color) !important;
+}
+.singaleArticle {
+  color: white;
+  border: 2px solid white;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 20px 0px;
+}
+.singleArticleImg {
+}
+#transparent-table {
+  background-color: var(--Third_color) !important;
+  border-collapse: collapse;
+}
+
+#transparent-table tr,
+#transparent-table td {
+  background-color: transparent !important;
+  border: 1px solid var(--main_color);
+
+  color: white;
+}
+.Article_detail_page {
+  color: white;
+}
+.Article_detail_page img {
+  width: 60%;
+  border-radius: 30px;
+
+  margin: 20px auto;
+}
+.btns-section button {
+  margin: 10px;
+}
+.Comments-section {
+}
+.Comments-section .comment_card {
+  background-color: var(--second_color);
+  color: white;
+  margin: 10px 0px;
+}
+.blockquote-footer {
+  color: antiquewhite !important;
+}
+.form-btns Button {
+  margin: 10px;
 }

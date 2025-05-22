@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { SpinnerSection } from "../Spinner";
-import { GetArticlesbyId, GetCommentsByArticleId } from "../../../api";
+import {
+  GetArticlesbyId,
+  GetCommentsByArticleId,
+  postComment,
+} from "../../../api";
 import useFormattedDate from "../Hooks/useFormattedDate";
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 import { VoteComponent } from "../VoteComponent";
+import { CommentForm } from "../CommentForm";
 
-export const ArticleDetails = () => {
+export const ArticleDetails = ({ selectedUser }) => {
   const { id } = useParams();
   const [isloading, setIsLoading] = useState(false);
   const [article, setArticle] = useState({});
   const [articleComments, setArticleComments] = useState([]);
+  const [commentFormShow, setCommentFormShow] = useState(false);
+  const [commentBody, setCommentBody] = useState("");
+  const [error, setError] = useState("");
+  const [isPosting, setIsPosting] = useState(false);
   useEffect(() => {
     GetArticlesbyId(id)
       .then((data) => {
@@ -26,65 +35,121 @@ export const ArticleDetails = () => {
             setIsLoading(true);
           });
       });
-  });
+  }, []);
+
+  function addCommentHandler() {
+    setCommentFormShow(true);
+    console.log(selectedUser);
+  }
+  function postCommentHandler() {
+    if (!commentBody.trim()) {
+      setError("Comment cannot be empty!");
+      return;
+    }
+    if (!commentBody || commentBody.trim() === "") {
+      alert("Please Fill The Comment Field!");
+      return;
+    }
+    const newComment = {
+      username: selectedUser.username,
+      body: commentBody,
+    };
+    console.log(newComment, "newcomment");
+    setIsPosting(true);
+    postComment(id, newComment)
+      .then((data) => {
+        setArticleComments((prev) => [data, ...prev]);
+        setCommentBody(""); // Clear the input
+        setCommentFormShow(false); // Hide the form
+      })
+      .catch((err) => {
+        console.error("Failed to post comment:", err);
+      })
+      .finally(() => {
+        setIsPosting(false);
+      });
+  }
+
   const formattedDate = useFormattedDate(article?.created_at);
   return (
     <>
       {isloading ? (
-        <Row>
-          <Col lg={12} sm={12}>
-            <Card className="Item-card">
-              <Card.Img
-                style={{
-                  width: "200px",
-                  margin: "10px auto",
-                  borderRadius: "10px",
-                }}
-                variant="top"
-                alt={article.title}
-                src={article.article_img_url}
+        <section className="Article_detail_page">
+          <div className="article-img">
+            <img alt={article.title} src={article.article_img_url} />
+          </div>
+          <h3>{article.title}</h3>
+          <p>{article.body}</p>
+          <Table id="transparent-table">
+            <tbody>
+              <tr>
+                <td>Topic:</td>
+                <td>{article.topic}</td>
+              </tr>
+              <tr>
+                <td>Created At:</td>
+                <td>{formattedDate}</td>
+              </tr>
+              <tr>
+                <td>Author:</td>
+                <td>{article.author}</td>
+              </tr>
+              <tr>
+                <td>Votes:</td>
+                <td>{article.votes}</td>
+              </tr>
+            </tbody>
+          </Table>
+
+          {commentFormShow ? (
+            <CommentForm
+              isPosting={isPosting}
+              error={error}
+              setError={setError}
+              postCommentHandler={postCommentHandler}
+              setCommentFormShow={setCommentFormShow}
+              setCommentBody={setCommentBody}
+              commentBody={commentBody}
+              id={id}
+            />
+          ) : (
+            <div className="btns-section">
+              <VoteComponent
+                articleId={article.article_id}
+                setArticle={setArticle}
               />
-              <Card.Body>
-                <Card.Title>{article.title}</Card.Title>
-                <Card.Text>{article.body}</Card.Text>
+              <Button onClick={addCommentHandler}>Add Comment</Button>
+            </div>
+          )}
 
-                <Table striped>
-                  <tbody>
-                    <tr>
-                      <td>Topic:</td>
-                      <td>{article.topic}</td>
-                    </tr>
-                    <tr>
-                      <td>Created At:</td>
-                      <td>{formattedDate}</td>
-                    </tr>
-                    <tr>
-                      <td>Author:</td>
-                      <td>{article.author}</td>
-                    </tr>
-                    <tr>
-                      <td>Votes:</td>
-                      <td>{article.votes}</td>
-                    </tr>
-                    <tr>
-                      <td colSpan={2}>
-                        <VoteComponent
-                          articleId={article.article_id}
-                          setArticle={setArticle}
-                        />
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-
-                {/* <VoteComponent
-                  articleId={articleSelect}
-                  setSingalArticle={setSingalArticle}
-                /> */}
-              </Card.Body>
-            </Card>
+          <Col lg={12} className="Comments-section">
+            <h4>Comments</h4>
+            {articleComments.map((comment, index) => {
+              const formattedDate = new Date(
+                comment.created_at
+              ).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              });
+              return (
+                <Card className="Item-card comment_card" key={index}>
+                  <Card.Body>
+                    <blockquote className="blockquote mb-0">
+                      <p>{comment.body}</p>
+                      <footer className="blockquote-footer">
+                        {comment.author}
+                      </footer>
+                      <footer className="blockquote-footer">
+                        Created at: {formattedDate}
+                      </footer>
+                    </blockquote>
+                  </Card.Body>
+                </Card>
+              );
+            })}
           </Col>
-        </Row>
+        </section>
       ) : (
         <SpinnerSection />
       )}

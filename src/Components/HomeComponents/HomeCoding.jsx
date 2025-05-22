@@ -36,9 +36,9 @@ export const HomeCoding = () => {
             <Col className="left-side-home-article" md={12} lg={6}>
               <img src={article.article_img_url} alt="Coding Image" />
             </Col>
-            <Col className="right-side-home-article" md={12} lg={6}>
-              <h3>{article.topic}</h3>
-              <p>{article.title}</p>
+            <Col className="right-side-home-article" md={12} lg={5}>
+              <p>{article.topic}</p>
+              <h3>{article.title}</h3>
             </Col>
           </Row>
         </section>

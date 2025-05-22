@@ -3,12 +3,12 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router";
 
-export const HeaderNavbar = ({ selectUser }) => {
+export const HeaderNavbar = ({ selectedUser }) => {
   return (
     <Navbar expand="lg" className="main-navbar">
       <Container>
         <Navbar.Brand style={{ color: "white" }}>
-          NC News {selectUser.name}
+          NC News {selectedUser.name}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -16,14 +16,9 @@ export const HeaderNavbar = ({ selectUser }) => {
             <NavLink to="/" className="nav-link">
               Home
             </NavLink>
-            <NavLink to="/find-article" className="nav-link">
-              Find Article
-            </NavLink>
+
             <NavLink to="/articles" className="nav-link">
               Articles
-            </NavLink>
-            <NavLink to="/comments" className="nav-link">
-              Comments
             </NavLink>
           </Nav>
         </Navbar.Collapse>

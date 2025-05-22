@@ -1,36 +1,49 @@
-import { Col } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 export const ArticleName = ({
-  articleSelect,
+  articleSelectId,
+  setArticleSelectId,
   allArticleTitleObject,
-  setArticleSelect,
-  setArticleTitleLoad,
+  searchSingleArticleHandler,
 }) => {
   function ArticleSelectHandler(e) {
-    setArticleSelect(e.target.value);
-    setArticleTitleLoad(true);
+    setArticleSelectId(e.target.value);
+    // setArticleTitleLoad(true);
   }
 
   return (
     <Form className="formGroup">
-      <Col lg={12} className="mb-3">
-        <Form.Select
-          aria-label="Select Order"
-          value={articleSelect || ""}
-          onChange={ArticleSelectHandler}
-        >
-          <option value="" disabled>
-            --Select Article By Title--
-          </option>
-          {Object.entries(allArticleTitleObject).map(([key, value], index) => {
-            return (
-              <option value={key} key={index}>
-                {value}
-              </option>
-            );
-          })}
-        </Form.Select>
-      </Col>
+      <Row>
+        <Col lg={10} md={12} className="mb-3">
+          <Form.Select
+            aria-label="Select Order"
+            value={articleSelectId || ""}
+            onChange={ArticleSelectHandler}
+          >
+            <option value="" disabled>
+              --Select Article By Title--
+            </option>
+            {Object.entries(allArticleTitleObject).map(
+              ([key, value], index) => {
+                return (
+                  <option value={key} key={index}>
+                    {value}
+                  </option>
+                );
+              }
+            )}
+          </Form.Select>
+        </Col>
+        <Col lg={2} md={12}>
+          <Button
+            onClick={() => {
+              searchSingleArticleHandler(articleSelectId);
+            }}
+          >
+            Search
+          </Button>
+        </Col>
+      </Row>
     </Form>
   );
 };
