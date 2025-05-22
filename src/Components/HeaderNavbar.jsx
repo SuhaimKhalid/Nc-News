@@ -3,11 +3,13 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router";
 
-export const HeaderNavbar = () => {
+export const HeaderNavbar = ({ selectUser }) => {
   return (
     <Navbar expand="lg" className="main-navbar">
       <Container>
-        <Navbar.Brand style={{ color: "white" }}>NC News</Navbar.Brand>
+        <Navbar.Brand style={{ color: "white" }}>
+          NC News {selectUser.name}
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">

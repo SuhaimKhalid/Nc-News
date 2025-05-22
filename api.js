@@ -21,6 +21,11 @@ export const GetCommentsByArticleId = (id) => {
     return data.comments;
   });
 };
+export const GetUsers = () => {
+  return api.get("/users").then(({ data }) => {
+    return data.users;
+  });
+};
 
 //Update Article by Increment vote
 export const UpdateVoteByArticle = (id, inc_votes) => {
