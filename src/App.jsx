@@ -11,6 +11,7 @@ import { Container } from "react-bootstrap";
 import { SingalArticle } from "./Components/Singal Article Components/SingalArticle";
 import { GetUsers } from "../api";
 import { LoginComponent } from "./Components/LoginComponent/LoginComponent";
+import { ArticleDetails } from "./Components/ArticleComponents/ArticleDetails";
 function App() {
   const [users, setUsers] = useState([]);
   const [selectUser, setSelectedUser] = useState({});
@@ -40,6 +41,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/articles" element={<Articles />} />
+              <Route path="/article/:id" element={<ArticleDetails />} />
               <Route path="/find-article" element={<SingalArticle />} />
               <Route path="/comments" element={<Comments />} />
             </Routes>

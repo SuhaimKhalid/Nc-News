@@ -5,7 +5,8 @@ import { ArticleCard } from "./ArticleCard";
 import { useEffect, useState } from "react";
 import { GetAllArticles } from "../../../api";
 import Spinner from "react-bootstrap/Spinner";
-
+import { GetArticlesbyId } from "../../../api";
+import { useNavigate } from "react-router";
 export const Articles = () => {
   const [articleTopics, setArticleTopics] = useState([]);
   const [allArticles, setAllArticles] = useState([]);
@@ -25,6 +26,10 @@ export const Articles = () => {
       });
   }, []);
 
+  const navigate = useNavigate();
+  function onClickCardHandler(id) {
+    navigate(`/article/${id}`);
+  }
   return (
     <>
       {!isloading ? (
@@ -38,7 +43,10 @@ export const Articles = () => {
 
           <ArticleFilter />
 
-          <ArticleCard allArticles={allArticles} />
+          <ArticleCard
+            onClickCardHandler={onClickCardHandler}
+            allArticles={allArticles}
+          />
         </Container>
       ) : (
         <section className="home-article spinner_center">

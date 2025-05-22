@@ -21,15 +21,13 @@ export const LoginComponent = ({
 
   return (
     <>
-      <Row style={{ justifyContent: "center" }}>
-        <Col sm={12} lg={4}>
-          <div className="add-form-div login-form">
-            <Form>
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="4">
-                  Select A User
-                </Form.Label>
-                <Col sm="8">
+      <section className="login-section">
+        <Row className="justify-content-center align-items-center vh-100 m-0">
+          <Col sm={12} lg={4}>
+            <div className="login-form-wrapper">
+              <Form>
+                <Form.Group className="mb-3">
+                  <Form.Label>Select A User to Login</Form.Label>
                   <Form.Select
                     aria-label="Select Order"
                     value={userName || ""}
@@ -38,20 +36,18 @@ export const LoginComponent = ({
                     <option value="" disabled>
                       --Select User--
                     </option>
-                    {users.map((user, index) => {
-                      return (
-                        <option value={user.name} key={index}>
-                          {user.name}
-                        </option>
-                      );
-                    })}
+                    {users.map((user, index) => (
+                      <option value={user.name} key={index}>
+                        {user.name}
+                      </option>
+                    ))}
                   </Form.Select>
-                </Col>
-              </Form.Group>
-            </Form>
-          </div>
-        </Col>
-      </Row>
+                </Form.Group>
+              </Form>
+            </div>
+          </Col>
+        </Row>
+      </section>
     </>
   );
 };

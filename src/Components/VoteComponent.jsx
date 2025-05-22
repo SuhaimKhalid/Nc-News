@@ -1,10 +1,10 @@
 import Button from "react-bootstrap/Button";
 import { UpdateVoteByArticle } from "../../api";
-export const VoteComponent = ({ articleId, setSingalArticle }) => {
+export const VoteComponent = ({ articleId, setArticle }) => {
   function voteHandler() {
-    const vt = 1;
-    UpdateVoteByArticle(articleId, vt).then((data) => {
-      setSingalArticle(data);
+    const vote = 1;
+    UpdateVoteByArticle(articleId, vote).then((data) => {
+      setArticle(data);
     });
   }
 

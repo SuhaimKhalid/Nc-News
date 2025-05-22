@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArticleName } from "./ArticleName";
 import { GetAllArticles } from "../../../api";
-import { GetAllArticlesbyId } from "../../../api";
+import { GetArticlesbyId } from "../../../api";
 import Spinner from "react-bootstrap/Spinner";
 import { Container } from "react-bootstrap";
 import { SingalArticleCard } from "./SingalArticleCard";
@@ -39,7 +39,7 @@ export const SingalArticle = () => {
 
   useEffect(() => {
     if (articleTitleLoad) {
-      GetAllArticlesbyId(articleSelect)
+      GetArticlesbyId(articleSelect)
         .then((data) => {
           setSingalArticle(data);
         })

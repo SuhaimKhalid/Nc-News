@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
-
+import { SpinnerSection } from "../Spinner";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import { VoteComponent } from "../VoteComponent";

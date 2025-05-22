@@ -3,7 +3,8 @@ import { Col, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
-export const ArticleCard = ({ allArticles }) => {
+
+export const ArticleCard = ({ allArticles, onClickCardHandler }) => {
   function isValidImageUrl(url) {
     return (
       typeof url === "string" &&
@@ -15,12 +16,28 @@ export const ArticleCard = ({ allArticles }) => {
     <>
       <Row>
         {allArticles.map((article, index) => {
+          //May be imageformater Later
           const imageUrl = isValidImageUrl(article.article_img_url)
             ? article.img_url
             : "/images/default.jpg";
+
+          const formatedDate = new Date(article.created_at).toLocaleDateString(
+            "en-GB",
+            {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            }
+          );
+
           return (
             <Col lg={4} md={6} sm={12} key={index}>
-              <Card className="Item-card">
+              <Card
+                className="Item-card card-click"
+                onClick={() => {
+                  onClickCardHandler(article.article_id);
+                }}
+              >
                 <Card.Img
                   style={{
                     width: "200px",
@@ -28,30 +45,27 @@ export const ArticleCard = ({ allArticles }) => {
                     borderRadius: "10px",
                   }}
                   variant="top"
-                  alt={"ArticleImage No " + article.article_id}
+                  alt={"ArticleImage No " + article.title}
                   src={article.article_img_url}
                 />
                 <Card.Body>
-                  <Card.Title>{article.item_name}</Card.Title>
-                  <Card.Text>{article.topic}</Card.Text>
+                  <Card.Title>{article.title}</Card.Title>
                   <Table striped>
                     <tbody>
                       <tr>
+                        <td>Topic:</td>
+                        <td>{article.topic.toUpperCase()}</td>
+                      </tr>
+                      <tr>
                         <td>Created At:</td>
-                        <td>{article.created_at}</td>
+                        <td>{formatedDate}</td>
                       </tr>
                       <tr>
                         <td>Votes:</td>
                         <td>{article.votes}</td>
                       </tr>
-                      <tr>
-                        <td>Comment Count</td>
-                        <td>{article.comment_count}</td>
-                      </tr>
                     </tbody>
                   </Table>
-
-                  <Button variant="primary">Vote</Button>
                 </Card.Body>
               </Card>
             </Col>

@@ -10,7 +10,7 @@ export const GetAllArticles = () => {
   });
 };
 
-export const GetAllArticlesbyId = (id) => {
+export const GetArticlesbyId = (id) => {
   return api.get(`/articles/${id}`).then(({ data }) => {
     return data.article;
   });

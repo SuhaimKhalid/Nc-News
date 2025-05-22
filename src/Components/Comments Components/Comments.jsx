@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 import { ArticleName } from "../Singal Article Components/ArticleName";
 import { useEffect, useState } from "react";
 import { GetAllArticles, GetCommentsByArticleId } from "../../../api";
-import { GetAllArticlesbyId } from "../../../api";
+import { GetArticlesbyId } from "../../../api";
 import Spinner from "react-bootstrap/Spinner";
 import { CommentCardSection } from "./CommentCardSection";
 export const Comments = () => {
@@ -43,7 +43,7 @@ export const Comments = () => {
 
   useEffect(() => {
     if (articleTitleLoad) {
-      GetAllArticlesbyId(articleSelect)
+      GetArticlesbyId(articleSelect)
         .then((data) => {
           setSingleArticle(data);
         })
