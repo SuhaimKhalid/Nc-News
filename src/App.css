@@ -227,3 +227,16 @@ button {
 .form-btns Button {
   margin: 10px;
 }
+
+.comment-btn {
+  color: WHITE;
+  background-color: var(--Third_color) !important;
+  width: 3%;
+  border-radius: 50px !important;
+  position: absolute;
+  right: -16px;
+  top: -16px;
+}
+.comment_card {
+  position: relative;
+}
