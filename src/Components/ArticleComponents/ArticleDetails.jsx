@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { SpinnerSection } from "../Spinner";
+
 import {
   GetArticlesbyId,
   GetCommentsByArticleId,
@@ -12,6 +12,7 @@ import { Table } from "react-bootstrap";
 import { VoteComponent } from "../VoteComponent";
 import { CommentForm } from "../CommentForm";
 import { CommentSection } from "../Comments Components/CommentSection";
+import { SpinnerSection } from "../SpinnerSection";
 
 export const ArticleDetails = ({ selectedUser }) => {
   const { id } = useParams();
