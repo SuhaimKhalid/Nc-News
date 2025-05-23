@@ -12,6 +12,7 @@ import { Container } from "react-bootstrap";
 import { GetUsers } from "../api";
 import { LoginComponent } from "./Components/LoginComponent/LoginComponent";
 import { ArticleDetails } from "./Components/ArticleComponents/ArticleDetails";
+import { AppContext } from "./Components/AppContext";
 function App() {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState({});
@@ -26,30 +27,32 @@ function App() {
   }, []);
   return (
     <>
-      {loginshow ? (
-        <LoginComponent
-          setLoginShow={setLoginShow}
-          setSelectedUser={setSelectedUser}
-          userName={userName}
-          setUserName={setUserName}
-          users={users}
-        />
-      ) : (
-        <main>
-          <HeaderNavbar selectedUser={selectedUser} />
-          <Container>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/articles" element={<Articles />} />
-              <Route
-                path="/article/:id"
-                element={<ArticleDetails selectedUser={selectedUser} />}
-              />
-              {/* <Route path="/find-article" element={<SingalArticle />} /> */}
-            </Routes>
-          </Container>
-        </main>
-      )}
+      <AppContext.Provider value={{ selectedUser }}>
+        {loginshow ? (
+          <LoginComponent
+            setLoginShow={setLoginShow}
+            setSelectedUser={setSelectedUser}
+            userName={userName}
+            setUserName={setUserName}
+            users={users}
+          />
+        ) : (
+          <main>
+            <HeaderNavbar selectedUser={selectedUser} />
+            <Container>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/articles" element={<Articles />} />
+                <Route
+                  path="/article/:id"
+                  element={<ArticleDetails selectedUser={selectedUser} />}
+                />
+                {/* <Route path="/find-article" element={<SingalArticle />} /> */}
+              </Routes>
+            </Container>
+          </main>
+        )}
+      </AppContext.Provider>
     </>
   );
 }

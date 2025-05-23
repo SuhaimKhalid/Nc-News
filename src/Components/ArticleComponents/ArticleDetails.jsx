@@ -11,6 +11,7 @@ import { Row, Col, Card, Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 import { VoteComponent } from "../VoteComponent";
 import { CommentForm } from "../CommentForm";
+import { CommentSection } from "../Comments Components/CommentSection";
 
 export const ArticleDetails = ({ selectedUser }) => {
   const { id } = useParams();
@@ -39,7 +40,6 @@ export const ArticleDetails = ({ selectedUser }) => {
 
   function addCommentHandler() {
     setCommentFormShow(true);
-    console.log(selectedUser);
   }
   function postCommentHandler() {
     if (!commentBody.trim()) {
@@ -54,7 +54,7 @@ export const ArticleDetails = ({ selectedUser }) => {
       username: selectedUser.username,
       body: commentBody,
     };
-    console.log(newComment, "newcomment");
+
     setIsPosting(true);
     postComment(id, newComment)
       .then((data) => {
@@ -122,33 +122,10 @@ export const ArticleDetails = ({ selectedUser }) => {
             </div>
           )}
 
-          <Col lg={12} className="Comments-section">
-            <h4>Comments</h4>
-            {articleComments.map((comment, index) => {
-              const formattedDate = new Date(
-                comment.created_at
-              ).toLocaleDateString("en-GB", {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
-              });
-              return (
-                <Card className="Item-card comment_card" key={index}>
-                  <Card.Body>
-                    <blockquote className="blockquote mb-0">
-                      <p>{comment.body}</p>
-                      <footer className="blockquote-footer">
-                        {comment.author}
-                      </footer>
-                      <footer className="blockquote-footer">
-                        Created at: {formattedDate}
-                      </footer>
-                    </blockquote>
-                  </Card.Body>
-                </Card>
-              );
-            })}
-          </Col>
+          <CommentSection
+            setArticleComments={setArticleComments}
+            articleComments={articleComments}
+          />
         </section>
       ) : (
         <SpinnerSection />
