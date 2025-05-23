@@ -3,12 +3,13 @@ import { ArticleFilter } from "./ArticleFilter";
 
 import { ArticleCard } from "./ArticleCard";
 import { useEffect, useState } from "react";
-import { GetAllArticles } from "../../../api";
+import { GetAllArticles, getTopics } from "../../../api";
 import Spinner from "react-bootstrap/Spinner";
 import { GetArticlesbyId } from "../../../api";
 import { useNavigate } from "react-router";
 import { ArticleName } from "../Singal Article Components/ArticleName";
 import { SingleArticleCard } from "../Singal Article Components/SingleArticleCard";
+import { TopicCards } from "../Topic Components/TopicCards";
 export const Articles = () => {
   const [articleTopics, setArticleTopics] = useState([]);
   const [allArticles, setAllArticles] = useState([]);
@@ -24,13 +25,17 @@ export const Articles = () => {
   //TO get back User Selected Option by Id value
   const [articleSelectId, setArticleSelectId] = useState(""); //1,2,3
 
+  //For Topics
+  const [allTopics, setAllTopics] = useState([]);
+  useEffect(() => {
+    getTopics().then((data) => {
+      setAllTopics(data);
+    });
+  }, []);
   useEffect(() => {
     setLoading(true);
     GetAllArticles()
       .then((data) => {
-        const getTopics = [...new Set(data.map((item) => item.topic))];
-        setArticleTopics(getTopics);
-
         //For Singale Article
         const articleObject = {};
         data.forEach((item) => {
@@ -41,8 +46,6 @@ export const Articles = () => {
           ...prev,
           ...articleObject,
         }));
-
-        setAllArticles(data);
       })
       .finally(() => {
         setLoading(false);
@@ -64,6 +67,9 @@ export const Articles = () => {
   function onClickCardHandler(id) {
     navigate(`/article/${id}`);
   }
+  function onClickTopicHandler(slug) {
+    navigate(`/articles/${slug}`);
+  }
   return (
     <>
       {!isloading ? (
@@ -75,8 +81,12 @@ export const Articles = () => {
             setArticleSelectId={setArticleSelectId}
             articleSelectId={articleSelectId}
           />
-          <ArticleFilter />
-
+          <h3 className="Heading_topic">Topics</h3>
+          <TopicCards
+            onClickCardHandler={onClickCardHandler}
+            allTopics={allTopics}
+            onClickTopicHandler={onClickTopicHandler}
+          />
           {singleArticleShow ? (
             <SingleArticleCard
               setSingleArticleShow={setSingleArticleShow}

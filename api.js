@@ -26,7 +26,19 @@ export const GetUsers = () => {
     return data.users;
   });
 };
+export const getTopics = () => {
+  return api.get("/topics").then(({ data }) => {
+    return data.topics;
+  });
+};
 
+// Get Specifice Article by Topic
+
+export const getTopicArticles = (topic) => {
+  return api.get(`articles/?topic=${topic}`).then(({ data }) => {
+    return data.articles;
+  });
+};
 //Update Article by Increment vote
 export const UpdateVoteByArticle = (id, inc_votes) => {
   return api
