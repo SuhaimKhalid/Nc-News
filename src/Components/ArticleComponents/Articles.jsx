@@ -1,7 +1,3 @@
-import { Container } from "react-bootstrap";
-import { ArticleFilter } from "./ArticleFilter";
-
-import { ArticleCard } from "./ArticleCard";
 import { useEffect, useState } from "react";
 import { GetAllArticles, getTopics } from "../../../api";
 import Spinner from "react-bootstrap/Spinner";
@@ -11,8 +7,8 @@ import { ArticleName } from "../Singal Article Components/ArticleName";
 import { SingleArticleCard } from "../Singal Article Components/SingleArticleCard";
 import { TopicCards } from "../Topic Components/TopicCards";
 export const Articles = () => {
-  const [articleTopics, setArticleTopics] = useState([]);
-  const [allArticles, setAllArticles] = useState([]);
+  const navigate = useNavigate();
+
   const [isloading, setLoading] = useState(true);
 
   ////For Single Card Article
@@ -54,16 +50,22 @@ export const Articles = () => {
 
   //For Search For single Article
   function searchSingleArticleHandler(id) {
-    GetArticlesbyId(id)
-      .then((data) => {
-        setSingleArticle(data);
-      })
-      .finally(() => {
-        setSingleArticleShow(true);
-      });
+    if (articleSelectId != "") {
+      GetArticlesbyId(id)
+        .then((data) => {
+          setSingleArticle(data);
+        })
+        .catch(() => {
+          navigate("*");
+        })
+        .finally(() => {
+          setSingleArticleShow(true);
+        });
+    } else {
+      alert("Please Select an Article!");
+    }
   }
 
-  const navigate = useNavigate();
   function onClickCardHandler(id) {
     navigate(`/article/${id}`);
   }
@@ -93,10 +95,7 @@ export const Articles = () => {
               singleArticle={singleArticle}
             />
           ) : (
-            <ArticleCard
-              onClickCardHandler={onClickCardHandler}
-              allArticles={allArticles}
-            />
+            ""
           )}
         </section>
       ) : (

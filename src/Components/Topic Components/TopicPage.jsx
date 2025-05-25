@@ -3,6 +3,7 @@ import { TopicArticles } from "./TopicArticles";
 import { GetAllArticles, getTopicArticles } from "../../../api";
 import { useNavigate, useParams } from "react-router";
 import { SpinnerSection } from "../SpinnerSection";
+import { ArticleFilter } from "./ArticleFilter";
 export const TopicPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [allArticles, setAllArticles] = useState([]);
@@ -19,16 +20,25 @@ export const TopicPage = () => {
       .then((data) => {
         setAllArticles(data);
       })
+      .catch(() => {
+        navigate("*");
+      })
 
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [slug]);
   return (
     <>
+      <ArticleFilter
+        setIsLoading={setIsLoading}
+        setAllArticles={setAllArticles}
+      />
       {!isLoading ? (
-        <TopicArticles
-          allArticles={allArticles}
-          onClickCardHandler={onClickCardHandler}
-        />
+        <>
+          <TopicArticles
+            allArticles={allArticles}
+            onClickCardHandler={onClickCardHandler}
+          />
+        </>
       ) : (
         <SpinnerSection />
       )}

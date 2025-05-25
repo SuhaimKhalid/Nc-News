@@ -47,6 +47,10 @@ export const TopicArticles = ({ onClickCardHandler, allArticles }) => {
                         <td>Votes:</td>
                         <td>{article.votes}</td>
                       </tr>
+                      <tr>
+                        <td>Comment Count:</td>
+                        <td>{article.comment_count}</td>
+                      </tr>
                     </tbody>
                   </Table>
                 </Card.Body>

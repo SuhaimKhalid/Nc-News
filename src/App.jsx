@@ -14,6 +14,7 @@ import { LoginComponent } from "./Components/LoginComponent/LoginComponent";
 import { ArticleDetails } from "./Components/ArticleComponents/ArticleDetails";
 import { AppContext } from "./Components/AppContext";
 import { TopicPage } from "./Components/Topic Components/TopicPage";
+import { NotFound } from "./Components/NotFound";
 function App() {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState({});
@@ -49,7 +50,8 @@ function App() {
                   element={<ArticleDetails selectedUser={selectedUser} />}
                 />
                 <Route path="/articles/:slug" element={<TopicPage />} />
-                {/* <Route path="/find-article" element={<SingalArticle />} /> */}
+
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </Container>
           </main>

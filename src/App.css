@@ -47,11 +47,11 @@ nav ul li .nav-link {
 }
 .home_section {
   width: 50%;
-
   padding: 20px;
   margin: 20px auto;
   background-color: white;
   border-radius: 20px;
+  transition: 1s;
 }
 
 .home_section h2 {
@@ -62,6 +62,7 @@ nav ul li .nav-link {
 .home_section p {
 }
 .home_section:hover {
+  transition: 1s;
   background-color: var(--second_color);
   color: white;
 }
@@ -179,7 +180,12 @@ nav ul li .nav-link {
 }
 button {
   border: white !important;
+  transition: 1s;
   background-color: var(--second_color) !important;
+}
+button:hover button:active button:focus {
+  transition: 1s;
+  background-color: var(--Third_color) !important;
 }
 .singaleArticle {
   color: white;
@@ -245,4 +251,29 @@ button {
   color: white;
   text-align: center;
   margin: 20px;
+}
+.topiccard-click {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0px;
+}
+.topiccard-click .card {
+  background-color: var(--second_color);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  transition: 1s;
+}
+.topiccard-click .card .card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.topiccard-click .card:hover {
+  background-color: var(--Third_color);
+  transition: 1s all ease;
 }

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const api = axios.create({
   baseURL: "https://nc-news-6r1i.onrender.com/api/",
@@ -38,6 +39,15 @@ export const getTopicArticles = (topic) => {
   return api.get(`articles/?topic=${topic}`).then(({ data }) => {
     return data.articles;
   });
+};
+
+//Get Article by sorted
+export const getSortedArticles = (topic, sorted_by, order) => {
+  return api
+    .get(`articles/?topic=${topic}&sort_by=${sorted_by}&order=${order}`)
+    .then(({ data }) => {
+      return data.articles;
+    });
 };
 //Update Article by Increment vote
 export const UpdateVoteByArticle = (id, inc_votes) => {
