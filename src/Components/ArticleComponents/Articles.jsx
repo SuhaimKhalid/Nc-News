@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { ArticleName } from "../Singal Article Components/ArticleName";
 import { SingleArticleCard } from "../Singal Article Components/SingleArticleCard";
 import { TopicCards } from "../Topic Components/TopicCards";
+import { SpinnerSection } from "../SpinnerSection";
 export const Articles = () => {
   const navigate = useNavigate();
 
@@ -99,14 +100,7 @@ export const Articles = () => {
           )}
         </section>
       ) : (
-        <section className="home-article spinner_center">
-          <h3 className="text-center text-3xl font-bold">
-            Articles is Loading
-          </h3>
-          <Spinner className="spinner_div" animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-        </section>
+        <SpinnerSection />
       )}
     </>
   );

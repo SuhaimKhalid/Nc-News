@@ -31,7 +31,7 @@ export const HomeCoding = () => {
     <>
       {!isLoading ? (
         <section className="home-article">
-          <h3 className="">Articles</h3>
+          <h3>Articles</h3>
           <Row>
             <Col className="left-side-home-article" md={12} lg={6}>
               <img src={article.article_img_url} alt="Coding Image" />

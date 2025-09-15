@@ -81,26 +81,28 @@ export const ArticleDetails = ({ selectedUser }) => {
           </div>
           <h3>{article.title}</h3>
           <p>{article.body}</p>
-          <Table id="transparent-table">
-            <tbody>
-              <tr>
-                <td>Topic:</td>
-                <td>{article.topic}</td>
-              </tr>
-              <tr>
-                <td>Created At:</td>
-                <td>{formattedDate}</td>
-              </tr>
-              <tr>
-                <td>Author:</td>
-                <td>{article.author}</td>
-              </tr>
-              <tr>
-                <td>Votes:</td>
-                <td>{article.votes}</td>
-              </tr>
-            </tbody>
-          </Table>
+          <div className="table_div">
+            <Table id="transparent-table">
+              <tbody>
+                <tr>
+                  <td>Topic:</td>
+                  <td>{article.topic}</td>
+                </tr>
+                <tr>
+                  <td>Created At:</td>
+                  <td>{formattedDate}</td>
+                </tr>
+                <tr>
+                  <td>Author:</td>
+                  <td>{article.author}</td>
+                </tr>
+                <tr>
+                  <td>Votes:</td>
+                  <td>{article.votes}</td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
 
           {commentFormShow ? (
             <CommentForm

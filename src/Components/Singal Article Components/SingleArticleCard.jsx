@@ -30,37 +30,39 @@ export const SingleArticleCard = ({ singleArticle, setSingleArticleShow }) => {
           <img alt={singleArticle.title} src={singleArticle.article_img_url} />
         </Col>
         <Col lg={6} sm={12}>
-          <Table id="transparent-table">
-            <tbody>
-              <tr>
-                <td>Topic:</td>
-                <td>{singleArticle.topic}</td>
-              </tr>
-              <tr>
-                <td>Created At:</td>
-                <td>{formatedDate}</td>
-              </tr>
-              <tr>
-                <td>Author:</td>
-                <td>{singleArticle.author}</td>
-              </tr>
-              <tr>
-                <td>Votes:</td>
-                <td>{singleArticle.votes}</td>
-              </tr>
-              <tr>
-                <td colSpan={2}>
-                  <Button
-                    style={{ width: "100%" }}
-                    className=""
-                    onClick={onClickCardHandler}
-                  >
-                    View Article
-                  </Button>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
+          <div className="table_div">
+            <Table id="transparent-table">
+              <tbody>
+                <tr>
+                  <td>Topic:</td>
+                  <td>{singleArticle.topic}</td>
+                </tr>
+                <tr>
+                  <td>Created At:</td>
+                  <td>{formatedDate}</td>
+                </tr>
+                <tr>
+                  <td>Author:</td>
+                  <td>{singleArticle.author}</td>
+                </tr>
+                <tr>
+                  <td>Votes:</td>
+                  <td>{singleArticle.votes}</td>
+                </tr>
+                <tr>
+                  <td colSpan={2}>
+                    <Button
+                      style={{ width: "100%" }}
+                      className=""
+                      onClick={onClickCardHandler}
+                    >
+                      View Article
+                    </Button>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
         </Col>
       </Row>
     </>

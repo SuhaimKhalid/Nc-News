@@ -1,5 +1,6 @@
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { useEffect } from "react";
+import { Particle } from "../../Particle";
 
 export const LoginComponent = ({
   setSelectedUser,
@@ -21,9 +22,12 @@ export const LoginComponent = ({
 
   return (
     <>
-      <section className="login-section">
-        <Row className="justify-content-center align-items-center vh-100 m-0">
-          <Col sm={12} lg={4}>
+      <section
+        className="login-section"
+        style={{ position: "relative", zIndex: 1 }}
+      >
+        <Row className="justify-content-center align-items-center vh-100 m-0 ">
+          <Col sm={12} lg={4} className="login_left_side">
             <div className="login-form-wrapper">
               <Form>
                 <Form.Group className="mb-3">
