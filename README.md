@@ -4,6 +4,10 @@ NC News is a full-stack news application inspired by Reddit. It allows users to 
 
 ---
 
+## Deployment
+
+https://news-artilce.netlify.app/
+
 ## Features
 
 - View all articles with pagination
@@ -44,7 +48,7 @@ NC News is a full-stack news application inspired by Reddit. It allows users to 
 
 ### Login Page
 
-![Login Page](./src/assets/Images/login.pdf)
+![Login Page](./src/assets/Images/login.png)
 
 ### Home Page
 
@@ -103,3 +107,17 @@ Follow these steps to set up the project locally.
 6. Start the development server:
 
    npm run dev
+
+## icense
+
+This project is licensed under the MIT License.
+See the LICENSE
+file for details.
+
+## Author
+
+Suhaim Khalid
+
+GitHub: SuhaimKhalid
+
+Email: suhaimkhalid007@gmail.com
